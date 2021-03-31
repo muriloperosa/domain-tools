@@ -1,0 +1,20 @@
+{
+    "name": "murilo-perosa/domain-tools",
+    "description": "Handle domains and DNS tools.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Murilo Perosa",
+            "email": "perosamurilo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "MuriloPerosa\\DomainTools": "src/"
+        }
+    }
+}
