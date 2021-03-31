@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MuriloPerosa\\DomainTools": "src/"
+            "MuriloPerosa\\DomainTools\\": "src/"
         }
     }
 }
