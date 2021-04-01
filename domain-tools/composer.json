@@ -16,5 +16,8 @@
         "psr-4": {
             "MuriloPerosa\\DomainTools\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
     }
 }
