@@ -32,10 +32,34 @@ class Dns {
     public $domain;
 
     /**
+     * Subdomain
+     * @var string
+     */
+    public $subdomain;
+
+    /**
+     * Subdomains
+     * @var array
+     */
+    public $subdomains;
+
+    /**
      * Parts of name 
      * @var array
      */
     public $parts;
+
+    /**
+     * Segments of name 
+     * @var array
+     */
+    public $segments;
+
+    /**
+     * Name is valid 
+     * @var bool
+     */
+    public $is_valid;
 
     /**
      * Create new instance
@@ -43,12 +67,12 @@ class Dns {
      */
     public function __construct(string $name)
     {
-        $this->name = $name;
-
-        $this->sufix = null;
-        $this->is_subdomain = null;
-        $this->domain = null;
-        $this->parts = $this->splitInParts();
+        $this->name     = $name;
+        $this->parts    = $this->splitInParts();
+        $this->segments = $this->splitInSegments();
+        $this->is_valid = !empty(filter_var($this->name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME));
+        $this->sufix    = Sufix::getDnsSufix($this);
+        $this->setVars();
     }
 
     /**
@@ -69,6 +93,65 @@ class Dns {
     {
         $name = idn_to_ascii($this->name, 0, INTL_IDNA_VARIANT_UTS46);
         return $this->handleState($name);
+    }
+
+    /**
+     * Make a simple domain sanitization to reduce the user errors
+     * @param $remove_www 
+     * @return \MuriloPerosa\DomainTools\Dns
+     */
+    public function sanitize(bool $remove_www = true)
+    {   
+        // lower case
+        $name = mb_strtolower($this->name, 'UTF-8');
+        
+        //remove blank spaces
+        $name = preg_replace("/\s+/", "", $name);
+
+        // remove http and https
+        $name = preg_replace("#^https?://#i", "", $name);
+
+        // remove www.
+        if ($remove_www)
+        {
+            $name = preg_replace("#^www.#i", "", $name);
+        }
+
+        return $this->handleState($name);
+    }
+
+    /**
+     * Return domain name servers
+     * @return array
+     */
+    public function getNameServers()
+    {
+        $dns = dns_get_record($this->domain, DNS_NS);
+        $nameservers = [];
+        foreach ($dns as $current)
+        {
+            $nameservers[] = $current['target'];
+        }
+
+        return $nameservers;
+    }
+    
+    /**
+     * Check if name has SSL Certificate
+     * @return bool
+     */
+    public function hasSSL()
+    {
+        try {
+            $sanitized = $this->sanitize(false);
+            $stream = stream_context_create (array("ssl" => array("capture_peer_cert" => true)));
+            $read = fopen('https://'.$sanitized->name, "rb", false, $stream);
+            $cont = stream_context_get_params($read);
+            $var  = ($cont["options"]["ssl"]["peer_certificate"]);
+            return (!is_null($var));
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
@@ -96,24 +179,65 @@ class Dns {
     }
 
     /**
-     * Make a simple domain sanitization to reduce the user errors
-     * @param  string $domain
-     * @return \MuriloPerosa\DomainTools\Dns
+     * Return all name segments
+     * @return array
      */
-    public function sanitize()
-    {   
-        // lower case
-        $name = mb_strtolower($this->name, 'UTF-8');
+    private function splitInSegments()
+    {
+        $segments = [];
+
+        $parts = !empty($this->parts) ? $this->parts : $this->splitInParts();
+
+        if(!empty($parts))
+        {   
+            $suf = '';
+            
+            $key   = array_key_last($parts);
+            $last  = array_key_last($parts);
         
-        //remove blank spaces
-        $name = preg_replace("/\s+/", "", $name);
+            do{
+                if($key == $last)
+                {
+                    $suf = $parts[$key];
+                }
+                else
+                {
+                    $suf = $parts[$key].'.'.$suf;
+                }
+        
+                array_push($segments, $suf);
+                $key--;
+            }while(array_key_exists ($key, $parts));    
+        
+            $segments = array_reverse($segments);
+        }
 
-        // remove http and https
-        $name = preg_replace("#^https?://#i", "", $name);
+        return $segments;
+    }
 
-        // remove www.
-        $name = preg_replace("#^www.#i", "", $name);
+    /**
+     * Set general vars
+     */
+    private function setVars()
+    {
+        $sufix  = ".".$this->sufix;
+        $target = explode('.', substr($this->name, 0, -(strlen($sufix))));
 
-        return $this->handleState($name);
+        $domain = "";
+        if(!empty($target))
+        {
+            $domain = end($target).$sufix;
+        }
+
+        $subdomain  = str_replace($domain, "", $this->name);
+        if($subdomain)
+        {
+            $subdomain = str_replace(".".$domain, "", $this->name);
+        }
+
+        $this->domain       = $domain;
+        $this->subdomain    = !empty($subdomain) ? $subdomain : null;
+        $this->subdomains   = !empty($subdomain) ? explode('.', ($subdomain)) : [];
+        $this->is_subdomain = !empty($subdomains);
     }
 }
