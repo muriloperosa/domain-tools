@@ -15,11 +15,15 @@ namespace MuriloPerosa\DomainTools\Traits;
     {
         $f = fopen($path, 'r');
 
-        try {
-            while ($line = fgets($f)) {
+        try 
+        {
+            while ($line = fgets($f)) 
+            {
                 yield $line;
             }
-        } finally {
+        } 
+        finally 
+        {
             fclose($f);
         }
     }

@@ -142,14 +142,17 @@ class Dns {
      */
     public function hasSSL()
     {
-        try {
+        try 
+        {
             $sanitized = $this->sanitize(false);
             $stream = stream_context_create (array("ssl" => array("capture_peer_cert" => true)));
             $read = fopen('https://'.$sanitized->name, "rb", false, $stream);
             $cont = stream_context_get_params($read);
             $var  = ($cont["options"]["ssl"]["peer_certificate"]);
             return (!is_null($var));
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return false;
         }
     }
@@ -195,8 +198,9 @@ class Dns {
             $key   = array_key_last($parts);
             $last  = array_key_last($parts);
         
-            do{
-                if($key == $last)
+            do 
+            {
+                if ($key == $last)
                 {
                     $suf = $parts[$key];
                 }
@@ -207,7 +211,7 @@ class Dns {
         
                 array_push($segments, $suf);
                 $key--;
-            }while(array_key_exists ($key, $parts));    
+            } while(array_key_exists ($key, $parts));    
         
             $segments = array_reverse($segments);
         }
@@ -224,13 +228,13 @@ class Dns {
         $target = explode('.', substr($this->name, 0, -(strlen($sufix))));
 
         $domain = "";
-        if(!empty($target))
+        if (!empty($target))
         {
             $domain = end($target).$sufix;
         }
 
         $subdomain  = str_replace($domain, "", $this->name);
-        if($subdomain)
+        if ($subdomain)
         {
             $subdomain = str_replace(".".$domain, "", $this->name);
         }

@@ -39,7 +39,8 @@ class Sufix {
      */
     public static function getDnsSufix(Dns $dns)
     {
-        foreach ($dns->segments as $segment) {
+        foreach ($dns->segments as $segment) 
+        {
             if (in_array($segment, self::getSufixList())) 
             {
                 return $segment;
@@ -56,7 +57,8 @@ class Sufix {
     {
         self::$list = [];
 
-        foreach (self::getLines(self::$data_path) as $n => $line) {
+        foreach (self::getLines(self::$data_path) as $n => $line) 
+        {
             $line = preg_replace('/\s+/', ' ', trim($line));
             if (!empty($line) && strpos($line, '//') === false)
             {
