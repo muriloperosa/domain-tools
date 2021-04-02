@@ -14,22 +14,22 @@ class Dns {
     public $name;
 
     /**
+     * Domain
+     * @var string
+     */
+    public $domain;
+    
+    /**
      * Domain sufix
      * @var string
      */
     public $sufix;
 
     /**
-     * Domain sufix
+     * Name is a subdomain
      * @var boolean
      */
     public $is_subdomain;
-
-    /**
-     * Domain
-     * @var string
-     */
-    public $domain;
 
     /**
      * Subdomain
@@ -38,7 +38,7 @@ class Dns {
     public $subdomain;
 
     /**
-     * Subdomains
+     * List of Subdomains
      * @var array
      */
     public $subdomains;

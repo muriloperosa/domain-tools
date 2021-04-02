@@ -34,22 +34,6 @@ class Sufix {
     }
 
     /**
-     * Populate the sufix list
-     */
-    private static function populateSufixList()
-    {
-        self::$list = [];
-
-        foreach (self::getLines(self::$data_path) as $n => $line) {
-            $line = preg_replace('/\s+/', ' ', trim($line));
-            if (!empty($line) && strpos($line, '//') === false)
-            {
-                array_push(self::$list, $line);
-            }
-        }
-    }
-
-    /**
      * Return domain sufix
      * @return string
      */
@@ -63,5 +47,21 @@ class Sufix {
         }
 
         return '';
+    }
+
+    /**
+     * Populate the sufix list
+     */
+    private static function populateSufixList()
+    {
+        self::$list = [];
+
+        foreach (self::getLines(self::$data_path) as $n => $line) {
+            $line = preg_replace('/\s+/', ' ', trim($line));
+            if (!empty($line) && strpos($line, '//') === false)
+            {
+                array_push(self::$list, $line);
+            }
+        }
     }
 }
