@@ -6,6 +6,7 @@ Simple library to deal with basic DNS situations.
 
 - Conversion;
 - Sanitization;
+- Validaion;
 - Check SSL certificate;
 - Check name servers;
 - Access public sufix list;
