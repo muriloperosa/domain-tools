@@ -44,7 +44,7 @@ public $name;
 public $subdomain;
 
 /**
- * Nem Domain
+ * Name Domain
  * @var string
  */
 public $domain;
