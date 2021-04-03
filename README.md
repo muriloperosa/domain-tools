@@ -5,32 +5,31 @@
 
 PHP - Simple library to deal with basic DNS situations.
 
-- Conversion;
-- Sanitization;
-- Validation;
-- Check SSL certificate;
+- Name Conversion;
+- Name Sanitization;
+- Name Validation;
+- Check name SSL certificate;
 - Check name servers;
-- Access public sufix list;
-- Get name parts (sufix, domain, subdomain).
-
-## Package
-
-### Installation
+- Get name parts (sufix, domain, subdomain);
+- Get public sufix list.
+## Install
 ```sh
 composer require murilo-perosa/domain-tools
 ```
 
-### Updating
+## Update
 
 ```sh
 composer update murilo-perosa/domain-tools
 ```
 
-## Basic Usage
+## Name.php
 
-### Dns.php
+Class used to handle Domains and Subdomains names.
 
-Variables:
+
+### Variables
+
 ```sh
 /**
  * Domain name
@@ -87,46 +86,49 @@ public $segments;
 public $is_valid;
 ```
 
-Instance the class:
+### Instance the class
+
 ```sh
-use MuriloPerosa\DomainTools\Dns;
+use MuriloPerosa\DomainTools\Name;
  
 // instance Dns using a name
-$dns = new Dns('google.com');
+$name = new Name('google.com');
 ```
 
-Change state functions: 
+### Change state functions
 
 ```sh
 // convert name to UTF-8
-$dns->idnToUtf8();
+$name->idnToUtf8();
 
 // convert name to ASCII
-$dns->idnToAscii();
+$name->idnToAscii();
 
 // sanitize the name
-$dns->sanitize(false);
+$name->sanitize(false);
 
 // sanitize the name and remove "www."
-$dns->sanitize(true);
+$name->sanitize(true);
 
 // you can use them like this
-$dns->idnToUtf8()
+$name->idnToUtf8()
     ->sanitize();
 ```
 
-General functions:
+### General functions
 ```sh
 // get current name servers
-$name_servers = $dns->getNameServers();
+$name_servers = $name->getNameServers();
 
 // check if name has ssl certificate
-$has_ssl = $dns->hasSSL();
+$has_ssl = $name->hasSSL();
 ```
 
-### Sufix.php
+## Sufix.php
 
-General Functions:
+Class used to handle names sufix. 
+
+### General Functions
 
 ```sh
 
@@ -136,12 +138,8 @@ use MuriloPerosa\DomainTools\Sufix;
 $list = Sufix::getSufixList();
 
 // get name sufix
-$dns = new Dns('google.com');
-$sufix = Sufix::getDnsSufix($dns);
+$name = new Name('google.com');
+$sufix = Sufix::getDnsSufix($name);
 ```
-
-## Links
-- [Packagist](https://packagist.org/packages/murilo-perosa/domain-tools)
-
 ## Author
-Murilo Perosa  <<perosamurilo@gmail.com>><br />
+Murilo Perosa  <<perosamurilo@gmail.com>><br/>

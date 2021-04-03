@@ -3,9 +3,9 @@
 namespace MuriloPerosa\DomainTools;
 
 /**
- * Class to handle dns
+ * Class used to handle Domain and Subdomain names. 
  */
-class Dns {
+class Name {
     
     /**
      * Domain name
