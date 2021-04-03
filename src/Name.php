@@ -1,7 +1,6 @@
 <?php
 
 namespace MuriloPerosa\DomainTools;
-
 /**
  * Class used to handle Domain and Subdomain names. 
  */
