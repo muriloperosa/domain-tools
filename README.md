@@ -4,6 +4,13 @@
 
 Simple library to deal with basic DNS situations.
 
+- Conversion;
+- Sanitization;
+- Check SSL certificate;
+- Check name servers;
+- Access public sufix list;
+- Get name parts (sufix, domain, subdomain).
+
 ## Package
 
 ### Installation
