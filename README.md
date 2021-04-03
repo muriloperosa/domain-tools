@@ -2,11 +2,11 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) 
 
-Simple library to deal with basic DNS situations.
+PHP - Simple library to deal with basic DNS situations.
 
 - Conversion;
 - Sanitization;
-- Validaion;
+- Validation;
 - Check SSL certificate;
 - Check name servers;
 - Access public sufix list;
