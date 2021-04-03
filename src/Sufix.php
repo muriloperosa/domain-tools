@@ -5,7 +5,7 @@ namespace MuriloPerosa\DomainTools;
 use MuriloPerosa\DomainTools\Traits\HasFile;
 
 /**
- * Trait to handle domain sufixes
+ * Class used to handle names sufix. 
  */
 class Sufix {
     
@@ -37,7 +37,7 @@ class Sufix {
      * Return domain sufix
      * @return string
      */
-    public static function getDnsSufix(Dns $dns)
+    public static function getDnsSufix(Name $dns)
     {
         foreach ($dns->segments as $segment) 
         {
