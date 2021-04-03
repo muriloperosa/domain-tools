@@ -1,6 +1,7 @@
 # Domain Tools
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg) 
+[![Latest Stable Version](https://poser.pugx.org/murilo-perosa/domain-tools/v)](//packagist.org/packages/murilo-perosa/domain-tools) [![Total Downloads](https://poser.pugx.org/murilo-perosa/domain-tools/downloads)](//packagist.org/packages/murilo-perosa/domain-tools) [![Latest Unstable Version](https://poser.pugx.org/murilo-perosa/domain-tools/v/unstable)](//packagist.org/packages/murilo-perosa/domain-tools) [![License](https://poser.pugx.org/murilo-perosa/domain-tools/license)](//packagist.org/packages/murilo-perosa/domain-tools)
+
 
 PHP - Simple library to deal with basic DNS situations.
 
