@@ -32,19 +32,25 @@ Class used to handle Domains and Subdomains names.
 
 ```sh
 /**
- * Domain name
+ * Current name
  * @var string
  */
 public $name;
 
 /**
- * Domain
+ * Name Subdomain
+ * @var string
+ */
+public $subdomain;
+
+/**
+ * Nem Domain
  * @var string
  */
 public $domain;
 
 /**
- * Domain sufix
+ * Name sufix
  * @var string
  */
 public $sufix;
@@ -54,12 +60,6 @@ public $sufix;
  * @var boolean
  */
 public $is_subdomain;
-
-/**
- * Subdomain
- * @var string
- */
-public $subdomain;
 
 /**
  * List of Subdomains
@@ -116,6 +116,7 @@ $name->idnToUtf8()
 ```
 
 ### General functions
+
 ```sh
 // get current name servers
 $name_servers = $name->getNameServers();
@@ -133,6 +134,7 @@ Class used to handle names sufix.
 ```sh
 
 use MuriloPerosa\DomainTools\Sufix;
+use MuriloPerosa\DomainTools\Name;
 
 // get the sufix list
 $list = Sufix::getSufixList();
