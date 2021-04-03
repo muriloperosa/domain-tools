@@ -14,8 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MuriloPerosa\\DomainTools\\": "src/",
-            // "MuriloPerosa\\DomainTools\\Traits\\": "src/Traits/"
+            "MuriloPerosa\\DomainTools\\": "domain-tools/src/"
         }
     },
     "require-dev": {
