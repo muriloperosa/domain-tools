@@ -146,7 +146,7 @@ $sufix = Sufix::getDnsSufix($name);
 
 ## NameHelper.php
 
-Helper that contains static funtions to for the usefull name treatment situations. <br/>
+Helper that contains static funtions for treatment situations. <br/>
 You must use that class when you need to apply quick operations to the name.  
 
 ### General Functions
