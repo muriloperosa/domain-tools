@@ -143,5 +143,38 @@ $list = Sufix::getSufixList();
 $name = new Name('google.com');
 $sufix = Sufix::getDnsSufix($name);
 ```
+
+## NameHelper.php
+
+Helper that contains static funtions to for the usefull name treatment situations. <br/>
+You must use that class when you need to apply quick operations to the name.  
+
+### General Functions
+```sh
+use MuriloPerosa\DomainTools\Helpers\NameHelper;
+
+// Sanitize name
+$name = NameHelper::sanitize('https://google.com', true); // 'https://google.com' => 'google.com'
+
+// Split name in parts
+$name = NameHelper::splitInParts('google.com'); // 'google.com' => ['google', 'com']
+
+// Return name in segment
+$name = NameHelper::splitInSegments('google.com'); // 'google.com' => ['com', 'google.com']
+
+// Validate name
+$is_valid = NameHelper::validateName('google.com'); // true
+
+// Convert domain name from IDN to UTF-8
+$name = NameHelper::idnToUtf8('xn--tst-qla.de'); // 'täst.de'
+
+// Convert domain name from IDN to ASCII
+$name = NameHelper::idnToASCII('täst.de'); // 'xn--tst-qla.de'
+
+// Check if name has SSL Certificate
+$has_ssl = NameHelper::hasSSL('google.com'); // true
+
+```
+
 ## Author
 Murilo Perosa  <<perosamurilo@gmail.com>><br/>

@@ -1,6 +1,9 @@
 <?php
 
 namespace MuriloPerosa\DomainTools;
+
+use MuriloPerosa\DomainTools\Helpers\NameHelper;
+
 /**
  * Class used to handle Domain and Subdomain names. 
  */
@@ -66,12 +69,7 @@ class Name {
      */
     public function __construct(string $name)
     {
-        $this->name     = $name;
-        $this->parts    = $this->splitInParts();
-        $this->segments = $this->splitInSegments();
-        $this->is_valid = !empty(filter_var($this->name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME));
-        $this->sufix    = Sufix::getDnsSufix($this);
-        $this->setVars();
+        $this->handleState($name);
     }
 
     /**
@@ -80,8 +78,7 @@ class Name {
      */
     public function idnToUtf8()
     {
-        $name = idn_to_utf8($this->name, 0, INTL_IDNA_VARIANT_UTS46);
-        return $this->handleState($name);
+        return $this->handleState(NameHelper::idnToUtf8($this->name));
     }
 
     /**
@@ -90,8 +87,7 @@ class Name {
      */
     public function idnToAscii()
     {
-        $name = idn_to_ascii($this->name, 0, INTL_IDNA_VARIANT_UTS46);
-        return $this->handleState($name);
+        return $this->handleState(NameHelper::idnToAscii($this->name));
     }
 
     /**
@@ -101,22 +97,7 @@ class Name {
      */
     public function sanitize(bool $remove_www = true)
     {   
-        // lower case
-        $name = mb_strtolower($this->name, 'UTF-8');
-        
-        //remove blank spaces
-        $name = preg_replace("/\s+/", "", $name);
-
-        // remove http and https
-        $name = preg_replace("#^https?://#i", "", $name);
-
-        // remove www.
-        if ($remove_www)
-        {
-            $name = preg_replace("#^www.#i", "", $name);
-        }
-
-        return $this->handleState($name);
+        return $this->handleState(NameHelper::sanitize($this->name, $remove_www));
     }
 
     /**
@@ -141,28 +122,7 @@ class Name {
      */
     public function hasSSL()
     {
-        try 
-        {
-            $sanitized = $this->sanitize(false);
-            $stream = stream_context_create (array("ssl" => array("capture_peer_cert" => true)));
-            $read = fopen('https://'.$sanitized->name, "rb", false, $stream);
-            $cont = stream_context_get_params($read);
-            $var  = ($cont["options"]["ssl"]["peer_certificate"]);
-            return (!is_null($var));
-        } 
-        catch (\Exception $e) 
-        {
-            return false;
-        }
-    }
-
-    /**
-     * Split domain in parts 
-     * @return array
-     */
-    private function splitInParts()
-    {
-        return explode('.', $this->name);
+        return NameHelper::hasSSL($this->name);
     }
 
     /**
@@ -174,48 +134,15 @@ class Name {
     {
         if ($name != $this->name)
         {
-            return new self($name);
+            $this->name     = $name;
+            $this->parts    = NameHelper::splitInParts($this->name);
+            $this->segments = NameHelper::splitInSegments($this->name);
+            $this->is_valid = NameHelper::validateName($this->name);
+            $this->sufix    = Sufix::getDnsSufix($this);
+            $this->setVars();
         }
         
         return $this;
-    }
-
-    /**
-     * Return all name segments
-     * @return array
-     */
-    private function splitInSegments()
-    {
-        $segments = [];
-
-        $parts = !empty($this->parts) ? $this->parts : $this->splitInParts();
-
-        if(!empty($parts))
-        {   
-            $suf = '';
-            
-            $key   = array_key_last($parts);
-            $last  = array_key_last($parts);
-        
-            do 
-            {
-                if ($key == $last)
-                {
-                    $suf = $parts[$key];
-                }
-                else
-                {
-                    $suf = $parts[$key].'.'.$suf;
-                }
-        
-                array_push($segments, $suf);
-                $key--;
-            } while(array_key_exists ($key, $parts));    
-        
-            $segments = array_reverse($segments);
-        }
-
-        return $segments;
     }
 
     /**
