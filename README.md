@@ -13,13 +13,13 @@ PHP - Simple library to deal with basic DNS situations.
 - Get name parts (sufix, domain, subdomain);
 - Get public sufix list.
 ## Install
-```sh
+```php
 composer require murilo-perosa/domain-tools
 ```
 
 ## Update
 
-```sh
+```php
 composer update murilo-perosa/domain-tools
 ```
 
@@ -30,7 +30,7 @@ Class used to handle Domains and Subdomains names.
 
 ### Variables
 
-```sh
+```php
 /**
  * Current name
  * @var string
@@ -88,16 +88,16 @@ public $is_valid;
 
 ### Instance the class
 
-```sh
+```php
 use MuriloPerosa\DomainTools\Name;
  
-// instance Dns using a name
+// instance the class
 $name = new Name('google.com');
 ```
 
 ### Change state functions
 
-```sh
+```php
 // convert name to UTF-8
 $name->idnToUtf8();
 
@@ -117,7 +117,7 @@ $name->idnToUtf8()
 
 ### General functions
 
-```sh
+```php
 // get current name servers
 $name_servers = $name->getNameServers();
 
@@ -131,7 +131,7 @@ Class used to handle names sufix.
 
 ### General Functions
 
-```sh
+```php
 
 use MuriloPerosa\DomainTools\Sufix;
 use MuriloPerosa\DomainTools\Name;
@@ -150,7 +150,7 @@ Helper that contains static funtions for treatment situations. <br/>
 You must use that class when you need to apply quick operations to the name.  
 
 ### General Functions
-```sh
+```php
 use MuriloPerosa\DomainTools\Helpers\NameHelper;
 
 // Sanitize name
