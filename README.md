@@ -14,13 +14,13 @@ PHP - Simple library to deal with basic DNS situations.
 - Get public sufix list.
 
 ## Install
-```php
+```sh
 composer require murilo-perosa/domain-tools
 ```
 
 ## Update
 
-```php
+```sh
 composer update murilo-perosa/domain-tools
 ```
 
@@ -28,7 +28,7 @@ composer update murilo-perosa/domain-tools
 
 To run unit tests using PHPUnit:
 
-```php
+```sh
 ./vendor/bin/phpunit src/Tests
 ```
 
