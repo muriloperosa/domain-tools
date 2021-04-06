@@ -1,6 +1,6 @@
 # Domain Tools
 
-[![Latest Stable Version](https://poser.pugx.org/murilo-perosa/domain-tools/v)](//packagist.org/packages/murilo-perosa/domain-tools) [![Total Downloads](https://poser.pugx.org/murilo-perosa/domain-tools/downloads)](//packagist.org/packages/murilo-perosa/domain-tools) [![Latest Unstable Version](https://poser.pugx.org/murilo-perosa/domain-tools/v/unstable)](//packagist.org/packages/murilo-perosa/domain-tools) [![License](https://poser.pugx.org/murilo-perosa/domain-tools/license)](//packagist.org/packages/murilo-perosa/domain-tools)
+[![Latest Stable Version](https://poser.pugx.org/murilo-perosa/domain-tools/v)](//packagist.org/packages/murilo-perosa/domain-tools) [![Total Downloads](https://poser.pugx.org/murilo-perosa/domain-tools/downloads)](//packagist.org/packages/murilo-perosa/domain-tools) [![License](https://poser.pugx.org/murilo-perosa/domain-tools/license)](//packagist.org/packages/murilo-perosa/domain-tools)
 
 
 PHP - Simple library to deal with basic DNS situations.
@@ -12,6 +12,7 @@ PHP - Simple library to deal with basic DNS situations.
 - Check name servers;
 - Get name parts (sufix, domain, subdomain);
 - Get public sufix list.
+
 ## Install
 ```sh
 composer require murilo-perosa/domain-tools
@@ -21,6 +22,14 @@ composer require murilo-perosa/domain-tools
 
 ```sh
 composer update murilo-perosa/domain-tools
+```
+
+## Unit Tests
+
+To run unit tests using PHPUnit:
+
+```sh
+./vendor/bin/phpunit src/Tests
 ```
 
 ## Name.php
