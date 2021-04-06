@@ -32,19 +32,25 @@ Class used to handle Domains and Subdomains names.
 
 ```sh
 /**
- * Domain name
+ * Current name
  * @var string
  */
 public $name;
 
 /**
- * Domain
+ * Name Subdomain
+ * @var string
+ */
+public $subdomain;
+
+/**
+ * Name Domain
  * @var string
  */
 public $domain;
 
 /**
- * Domain sufix
+ * Name sufix
  * @var string
  */
 public $sufix;
@@ -54,12 +60,6 @@ public $sufix;
  * @var boolean
  */
 public $is_subdomain;
-
-/**
- * Subdomain
- * @var string
- */
-public $subdomain;
 
 /**
  * List of Subdomains
@@ -116,12 +116,13 @@ $name->idnToUtf8()
 ```
 
 ### General functions
+
 ```sh
 // get current name servers
 $name_servers = $name->getNameServers();
 
 // check if name has ssl certificate
-$has_ssl = $name->hasSSL();
+$has_ssl = $name->hasSsl();
 ```
 
 ## Sufix.php
@@ -133,6 +134,7 @@ Class used to handle names sufix.
 ```sh
 
 use MuriloPerosa\DomainTools\Sufix;
+use MuriloPerosa\DomainTools\Name;
 
 // get the sufix list
 $list = Sufix::getSufixList();
@@ -141,5 +143,38 @@ $list = Sufix::getSufixList();
 $name = new Name('google.com');
 $sufix = Sufix::getDnsSufix($name);
 ```
+
+## NameHelper.php
+
+Helper that contains static funtions for treatment situations. <br/>
+You must use that class when you need to apply quick operations to the name.  
+
+### General Functions
+```sh
+use MuriloPerosa\DomainTools\Helpers\NameHelper;
+
+// Sanitize name
+$name = NameHelper::sanitize('https://google.com', true); // 'https://google.com' => 'google.com'
+
+// Split name in parts
+$name = NameHelper::splitInParts('google.com'); // 'google.com' => ['google', 'com']
+
+// Return name in segment
+$name = NameHelper::splitInSegments('google.com'); // 'google.com' => ['com', 'google.com']
+
+// Validate name
+$is_valid = NameHelper::validate('google.com'); // true
+
+// Convert domain name from IDN to UTF-8
+$name = NameHelper::idnToUtf8('xn--tst-qla.de'); // 'täst.de'
+
+// Convert domain name from IDN to ASCII
+$name = NameHelper::idnToASCII('täst.de'); // 'xn--tst-qla.de'
+
+// Check if name has SSL Certificate
+$has_ssl = NameHelper::hasSsl('google.com'); // true
+
+```
+
 ## Author
 Murilo Perosa  <<perosamurilo@gmail.com>><br/>
