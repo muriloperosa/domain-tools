@@ -28,7 +28,7 @@ composer update murilo-perosa/domain-tools
 
 To run unit tests using PHPUnit:
 
-```sh
+```php
 ./vendor/bin/phpunit src/Tests
 ```
 
