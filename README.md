@@ -122,7 +122,7 @@ $name->idnToUtf8()
 $name_servers = $name->getNameServers();
 
 // check if name has ssl certificate
-$has_ssl = $name->hasSSL();
+$has_ssl = $name->hasSsl();
 ```
 
 ## Sufix.php
@@ -163,7 +163,7 @@ $name = NameHelper::splitInParts('google.com'); // 'google.com' => ['google', 'c
 $name = NameHelper::splitInSegments('google.com'); // 'google.com' => ['com', 'google.com']
 
 // Validate name
-$is_valid = NameHelper::validateName('google.com'); // true
+$is_valid = NameHelper::validate('google.com'); // true
 
 // Convert domain name from IDN to UTF-8
 $name = NameHelper::idnToUtf8('xn--tst-qla.de'); // 'täst.de'
@@ -172,7 +172,7 @@ $name = NameHelper::idnToUtf8('xn--tst-qla.de'); // 'täst.de'
 $name = NameHelper::idnToASCII('täst.de'); // 'xn--tst-qla.de'
 
 // Check if name has SSL Certificate
-$has_ssl = NameHelper::hasSSL('google.com'); // true
+$has_ssl = NameHelper::hasSsl('google.com'); // true
 
 ```
 
