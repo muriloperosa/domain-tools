@@ -120,9 +120,9 @@ class Name {
      * Check if name has SSL Certificate
      * @return bool
      */
-    public function hasSSL()
+    public function hasSsl()
     {
-        return NameHelper::hasSSL($this->name);
+        return NameHelper::hasSsl($this->name);
     }
 
     /**
@@ -137,7 +137,7 @@ class Name {
             $this->name     = $name;
             $this->parts    = NameHelper::splitInParts($this->name);
             $this->segments = NameHelper::splitInSegments($this->name);
-            $this->is_valid = NameHelper::validateName($this->name);
+            $this->is_valid = NameHelper::validate($this->name);
             $this->sufix    = Sufix::getDnsSufix($this);
             $this->setVars();
         }
