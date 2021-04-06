@@ -87,7 +87,7 @@ class NameHelper{
      * @param string $name
      * @return bool
      */
-    public static function validateName(string $name)
+    public static function validate(string $name)
     {
         return !empty(filter_var($name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME));
     }
@@ -117,7 +117,7 @@ class NameHelper{
      * @param string $name
      * @return bool
      */
-    public static function hasSSL($name)
+    public static function hasSsl($name)
     {
         try 
         {
