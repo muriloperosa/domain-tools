@@ -2,6 +2,8 @@
 
 namespace MuriloPerosa\DomainTools\Traits;
 
+use Generator;
+
 /**
  * Trait to handle files
  */
@@ -11,7 +13,7 @@ namespace MuriloPerosa\DomainTools\Traits;
      * Get lines of a file to read
      * @param string $file 
      */
-    public static function getLines(string $path)
+    public static function getFileLines(string $path) : Generator
     {
         $f = fopen($path, 'r');
 

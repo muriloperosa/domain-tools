@@ -13,7 +13,7 @@ class NameHelper{
      * @param bool   $remove_www
      * @return string
      */
-    public static function sanitize(string $name, bool $remove_www)
+    public static function sanitize(string $name, bool $remove_www) : string
     {
         // lower case
         $name = mb_strtolower($name, 'UTF-8');
@@ -38,7 +38,7 @@ class NameHelper{
      * @param string $name
      * @return array
      */
-    public static function splitInParts(string $name)
+    public static function splitInParts(string $name) : array
     {
         return explode('.', $name);
     }
@@ -48,7 +48,7 @@ class NameHelper{
      * @param string $name
      * @return array
      */
-    public static function splitInSegments(string $name)
+    public static function splitInSegments(string $name) : array
     {
         $segments = [];
 
@@ -87,7 +87,7 @@ class NameHelper{
      * @param string $name
      * @return bool
      */
-    public static function validate(string $name)
+    public static function validate(string $name) : bool
     {
         return !empty(filter_var($name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME));
     }
@@ -97,7 +97,7 @@ class NameHelper{
      * @param string $name
      * @return string
      */
-    public static function idnToUtf8(string $name)
+    public static function idnToUtf8(string $name) : string
     {
         return idn_to_utf8($name, 0, INTL_IDNA_VARIANT_UTS46);
     }
@@ -107,7 +107,7 @@ class NameHelper{
      * @param string $name
      * @return string
      */
-    public static function idnToAscii(string $name)
+    public static function idnToAscii(string $name) : string
     {
         return idn_to_ascii($name, 0, INTL_IDNA_VARIANT_UTS46);
     }
@@ -117,7 +117,7 @@ class NameHelper{
      * @param string $name
      * @return bool
      */
-    public static function hasSsl($name)
+    public static function hasSsl($name) : bool
     {
         try 
         {

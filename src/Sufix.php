@@ -23,7 +23,7 @@ class Sufix {
      * Returns the sufix list
      * @return array
      */
-    public static function getSufixList()
+    public static function getSufixList() : array
     {
         if (empty(self::$list))
         {
@@ -37,7 +37,7 @@ class Sufix {
      * Return domain sufix
      * @return string
      */
-    public static function getDnsSufix(Name $dns)
+    public static function getDnsSufix(Name $dns) : string
     {
         foreach ($dns->segments as $segment) 
         {
@@ -53,11 +53,11 @@ class Sufix {
     /**
      * Populate the sufix list
      */
-    private static function populateSufixList()
+    private static function populateSufixList() : void
     {
         self::$list = [];
 
-        foreach (self::getLines(self::$data_path) as $n => $line) 
+        foreach (self::getFileLines(self::$data_path) as $n => $line) 
         {
             $line = preg_replace('/\s+/', ' ', trim($line));
             if (!empty($line) && strpos($line, '//') === false)

@@ -74,18 +74,18 @@ class Name {
 
     /**
      * Convert domain name from IDN to UTF-8
-     * @return \MuriloPerosa\DomainTools\Dns
+     * @return \MuriloPerosa\DomainTools\Name
      */
-    public function idnToUtf8()
+    public function idnToUtf8() : Name
     {
         return $this->handleState(NameHelper::idnToUtf8($this->name));
     }
 
     /**
      * Convert domain name from IDN to ASCII
-     * @return \MuriloPerosa\DomainTools\Dns
+     * @return \MuriloPerosa\DomainTools\Name
      */
-    public function idnToAscii()
+    public function idnToAscii() : Name
     {
         return $this->handleState(NameHelper::idnToAscii($this->name));
     }
@@ -93,9 +93,9 @@ class Name {
     /**
      * Make a simple domain sanitization to reduce the user errors
      * @param $remove_www 
-     * @return \MuriloPerosa\DomainTools\Dns
+     * @return \MuriloPerosa\DomainTools\Name
      */
-    public function sanitize(bool $remove_www = true)
+    public function sanitize(bool $remove_www = true) : Name
     {   
         return $this->handleState(NameHelper::sanitize($this->name, $remove_www));
     }
@@ -104,7 +104,7 @@ class Name {
      * Return domain name servers
      * @return array
      */
-    public function getNameServers()
+    public function getNameServers() : array
     {
         $dns = dns_get_record($this->domain, DNS_NS);
         $nameservers = [];
@@ -120,7 +120,7 @@ class Name {
      * Check if name has SSL Certificate
      * @return bool
      */
-    public function hasSsl()
+    public function hasSsl() : bool
     {
         return NameHelper::hasSsl($this->name);
     }
@@ -128,9 +128,9 @@ class Name {
     /**
      * Handle state when $name change
      * @param string $name
-     * @return \MuriloPerosa\DomainTools\Dns
+     * @return \MuriloPerosa\DomainTools\Name
      */
-    private function handleState(string $name)
+    private function handleState(string $name) : Name
     {
         if ($name != $this->name)
         {
@@ -148,7 +148,7 @@ class Name {
     /**
      * Set general vars
      */
-    private function setVars()
+    private function setVars() : void
     {
         $sufix  = ".".$this->sufix;
         $target = explode('.', substr($this->name, 0, -(strlen($sufix))));
