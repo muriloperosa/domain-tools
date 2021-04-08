@@ -32,6 +32,14 @@ To run unit tests using PHPUnit:
 ./vendor/bin/phpunit src/Tests
 ```
 
+## Lint
+
+To run PHPLint:
+
+```sh
+./vendor/bin/phplint ./
+```
+
 ## Name.php
 
 Class used to handle Domains and Subdomains names.
