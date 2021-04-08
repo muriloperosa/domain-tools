@@ -124,7 +124,7 @@ class Name {
     {
         return NameHelper::hasSsl($this->name);
     }
-
+    
     /**
      * Handle state when $name change
      * @param string $name
