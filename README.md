@@ -11,7 +11,9 @@ PHP - Simple library to deal with basic DNS situations.
 - Check name SSL certificate;
 - Check name servers;
 - Get name parts (sufix, domain, subdomain);
-- Get public sufix list.
+- Get public sufix list;
+- Get and/or search for DNS records:
+ - 'A', 'AAAA', 'CNAME', 'NS', 'SOA', 'MX', 'SRV', 'TXT', 'CAA', 'NAPTR', 'PTR', 'HINFO', 'A6'
 
 ## Install
 ```sh
@@ -101,6 +103,13 @@ public $segments;
  * @var bool
  */
 public $is_valid;
+
+
+/**
+ * Domain records
+ * @var Record
+ */
+public $records;
 ```
 
 ### Instance the class
@@ -190,6 +199,115 @@ $name = NameHelper::idnToASCII('täst.de'); // 'xn--tst-qla.de'
 
 // Check if name has SSL Certificate
 $has_ssl = NameHelper::hasSsl('google.com'); // true
+
+```
+
+## Name.php
+
+Class used to handle DNS Records.
+
+
+### Variables
+
+```php
+
+/**
+ * Domain
+ * @param string 
+ */
+public $domain;
+
+/**
+ * Allowed records to get
+ * @param array
+ */
+private $allowed_records;
+
+```
+
+### Instance the class
+
+```php
+use MuriloPerosa\DomainTools\Record;
+ 
+// instance the class
+$dns = new Record('google.com');
+
+// OR
+
+use MuriloPerosa\DomainTools\Name;
+
+$name = new Name('google.com');
+$dns = $name->records;
+
+```
+
+```php
+
+// Return array with all records
+$records = $dns->getAll(); 
+
+// Return array with all NS records
+$records = $dns->getNS(); 
+
+// Return array with all A records
+$records = $dns->getA(); 
+
+// Return array with all AAAA records
+$records = $dns->getAAAA(); 
+
+// Return array with all CNAME records
+$records = $dns->getCNAME(); 
+
+// Return array with all SOA records
+$records = $dns->getSOA(); 
+
+// Return array with all SOA records
+$records = $dns->getMX(); 
+
+// Return array with all SRV records
+$records = $dns->getSRV(); 
+
+// Return array with all TXT records
+$records = $dns->getTXT(); 
+
+// Return array with all CAA records
+$records = $dns->getCAA();  // Not works on Windows (OS)
+
+// Return array with all NAPTR records
+$records = $dns->getNAPTR(); 
+
+// Return array with all PTR records
+$records = $dns->getPTR(); 
+
+// Return array with all HINFO records
+$records = $dns->getHINFO(); 
+
+// Return array with all A6 records
+$records = $dns->getA6();
+
+// Dinamic record search - returns a result array
+$records = $dns->search($type, $host);
+
+// to get records of all types or hosts you can use '*'
+$records = $dns->search('*', '*');
+
+// you can use a string to specify wich type or host you want to search
+$records = $dns->search('A', 'php.net');
+
+// you can use arrays to specify wich types or hosts you want to search
+$records = $dns->search(['A', 'MX'], ['php.net', 'blabla']);
+
+// You can use a mix of approaches
+// $records = $dns->search('*', '*');
+// $records = $dns->search('*', 'php.net');
+// $records = $dns->search('A', '*');
+// $records = $dns->search(['A', 'MX'], ['php.net', 'blabla']);
+// $records = $dns->search('*', ['php.net', 'blabla']);
+// $records = $dns->search('A', ['php.net', 'blabla']);
+// $records = $dns->search(['A', 'MX'], '*');
+// $records = $dns->search(['A', 'MX'], 'php.net');
+// $records = $dns->search(['A', 'MX'], ['php.net', 'blabla']);
 
 ```
 

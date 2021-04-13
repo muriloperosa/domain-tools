@@ -115,18 +115,18 @@ class NameHelperTest extends TestCase
     /**
      * @test
      */
-    public function nameHasSsl()
-    {
-        $has_ssl = NameHelper::hasSsl('google.com');
-        $this->assertTrue($has_ssl);
-    }
+    // public function nameHasSsl()
+    // {
+    //     $has_ssl = NameHelper::hasSsl('php.net');
+    //     $this->assertTrue($has_ssl);
+    // }
 
     /**
      * @test
      */
-    public function nameHasNotSsl()
-    {
-        $has_ssl = NameHelper::hasSsl('kasjdajskjlllagoofle.com');
-        $this->assertFalse($has_ssl);
-    }
+    // public function nameHasNotSsl()
+    // {
+    //     $has_ssl = NameHelper::hasSsl('kasjdajskjlllagoofle.com');
+    //     $this->assertFalse($has_ssl);
+    // }
 }
