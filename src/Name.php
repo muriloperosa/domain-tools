@@ -64,6 +64,12 @@ class Name {
     public $is_valid;
 
     /**
+     * Domain records
+     * @var Record
+     */
+    public $records;
+
+    /**
      * Create new instance
      * @param string $name
      */
@@ -106,7 +112,7 @@ class Name {
      */
     public function getNameServers() : array
     {
-        $dns = dns_get_record($this->domain, DNS_NS);
+        $dns = $this->records->getNS();
         $nameservers = [];
         foreach ($dns as $current)
         {
@@ -124,7 +130,7 @@ class Name {
     {
         return NameHelper::hasSsl($this->name);
     }
-
+    
     /**
      * Handle state when $name change
      * @param string $name
@@ -140,6 +146,7 @@ class Name {
             $this->is_valid = NameHelper::validate($this->name);
             $this->sufix    = Sufix::getDnsSufix($this);
             $this->setVars();
+            $this->records  = new Record($this->domain);
         }
         
         return $this;
