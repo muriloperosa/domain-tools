@@ -12,7 +12,7 @@ PHP - Simple library to deal with basic DNS situations.
 - Check name servers;
 - Get name parts (sufix, domain, subdomain);
 - Get public sufix list;
-- Get and/or search for DNS records: 'A', 'AAAA', 'CNAME', 'NS', 'SOA', 'MX', 'SRV', 'TXT', 'CAA', 'NAPTR', 'PTR', 'HINFO', 'A6'
+- Get and/or search for DNS records: 'A', 'AAAA', 'CNAME', 'NS', 'SOA', 'MX', 'SRV', 'TXT', 'CAA', 'NAPTR', 'PTR', 'HINFO', 'A6'.
 
 ## Install
 ```sh
