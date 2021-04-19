@@ -201,7 +201,7 @@ $has_ssl = NameHelper::hasSsl('google.com'); // true
 
 ```
 
-## Name.php
+## Redord.php
 
 Class used to handle DNS Records.
 
