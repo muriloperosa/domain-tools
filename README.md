@@ -262,7 +262,7 @@ $records = $dns->getCNAME();
 // Return array with all SOA records
 $records = $dns->getSOA(); 
 
-// Return array with all SOA records
+// Return array with all MX records
 $records = $dns->getMX(); 
 
 // Return array with all SRV records
