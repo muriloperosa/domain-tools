@@ -12,8 +12,7 @@ PHP - Simple library to deal with basic DNS situations.
 - Check name servers;
 - Get name parts (sufix, domain, subdomain);
 - Get public sufix list;
-- Get and/or search for DNS records:
- - 'A', 'AAAA', 'CNAME', 'NS', 'SOA', 'MX', 'SRV', 'TXT', 'CAA', 'NAPTR', 'PTR', 'HINFO', 'A6'
+- Get and/or search for DNS records: 'A', 'AAAA', 'CNAME', 'NS', 'SOA', 'MX', 'SRV', 'TXT', 'CAA', 'NAPTR', 'PTR', 'HINFO', 'A6'.
 
 ## Install
 ```sh
@@ -202,7 +201,7 @@ $has_ssl = NameHelper::hasSsl('google.com'); // true
 
 ```
 
-## Name.php
+## Record.php
 
 Class used to handle DNS Records.
 
@@ -241,6 +240,7 @@ $name = new Name('google.com');
 $dns = $name->records;
 
 ```
+### General functions
 
 ```php
 
@@ -262,7 +262,7 @@ $records = $dns->getCNAME();
 // Return array with all SOA records
 $records = $dns->getSOA(); 
 
-// Return array with all SOA records
+// Return array with all MX records
 $records = $dns->getMX(); 
 
 // Return array with all SRV records
