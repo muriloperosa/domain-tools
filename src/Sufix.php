@@ -11,7 +11,7 @@ class Sufix {
     
     use HasFile;
     
-    static $data_path = __DIR__ .'\..\data\public-sufix-list.dat';
+    static $data_path = __DIR__ .'/../data/public-sufix-list.dat';
 
     /**
      * Sufix list
