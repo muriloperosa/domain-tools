@@ -175,6 +175,6 @@ class Name {
         $this->domain       = $domain;
         $this->subdomain    = !empty($subdomain) ? $subdomain : null;
         $this->subdomains   = !empty($subdomain) ? explode('.', ($subdomain)) : [];
-        $this->is_subdomain = !empty($subdomains);
+        $this->is_subdomain = !empty($this->subdomains);
     }
 }
